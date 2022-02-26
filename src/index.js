@@ -1,14 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ThemeProvider } from "styled-components"; //使用SASS向量的方法
+
+//自訂色號
+const theme = {
+  colors: {
+    red_300: "#ff7979",
+    //有底線就不用刮起來 ,是合法的key
+    red_400: "#e33e3e",
+    red_500: "#af0505",
+  }
+}
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ThemeProvider theme={theme}>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </ThemeProvider>,
+
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
