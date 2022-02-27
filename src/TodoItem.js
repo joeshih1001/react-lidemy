@@ -57,6 +57,10 @@ const TodoContent = styled.div`
   ${props => props.size === 'XL' && `
     font-size: 20px;
   `}
+
+  ${props => props.$isDone && `
+    text-decoration: line-through;
+  `}
 `
 
 const TodoButtonWrapper = styled.div``
@@ -86,12 +90,16 @@ const RedButton = styled(Button)`
   color: red;
 `
 
-export default function TodoItem ({ className, size, todo, handleDelete}) {
+export default function TodoItem ({ className, size, todo, handleDelete, handleToggleIsDone}) {
   return (
     <TodoItemWrapper className={className}>
-      <TodoContent size={size}>{todo.content}</TodoContent>
+      <TodoContent $isDone={todo.isDone} size={size}>{todo.content}</TodoContent>
       <TodoButtonWrapper>
-        <Button>已完成</Button>
+        <Button onClick={()=> {
+          handleToggleIsDone(todo.id)
+        }}>
+          {todo.isDone ? "未完成" : "已完成"}
+        </Button>
         <RedButton onClick={() => {handleDelete(todo.id)}}>刪除</RedButton>
       </TodoButtonWrapper>
     </TodoItemWrapper>
